@@ -5,10 +5,7 @@ var mysql = require('mysql');
 var http = require('http');
 
 var session = require('express-session');
-var cookieParser = require('cookie-parser');
-app.use(cookieParser());
 app.use(session({
-    cookieName: 'session',
     secret: 'Ajay',
     maxAge: 1*60*1000, 
 	secure: true,
@@ -37,8 +34,6 @@ mc.connect();
 app.post('/login', function(req,res){
 	var username = req.body.username;
 	var password = req.body.password;
-	console.log(username);
-	console.log(password);
 	
 	   mc.query('select * from Users where username=? and password=?',[username,password],function(err, rows){
 		   
@@ -76,14 +71,10 @@ app.post('/logout',function(req,res){
 });
 
 app.post('/add', function(req,res){
+	console.log(req.session.username);
+	
 	var firstnumber = req.body.num1;
 	var secondnumber = req.body.num2;
-	
-	console.log(firstnumber);
-	console.log(secondnumber);
-	
-	console.log(Number.isInteger(firstnumber));
-	console.log(Number.isInteger(secondnumber));
 	
 	if(req.session.username)
 	{
@@ -109,12 +100,6 @@ app.post('/multiply', function(req,res){
 	var firstnumber = req.body.num1;
 	var secondnumber = req.body.num2;
 	
-	console.log(firstnumber);
-	console.log(secondnumber);
-	
-	console.log(Number.isInteger(firstnumber));
-	console.log(Number.isInteger(secondnumber));
-	
 	if(req.session.username)
 	{
 		if(Number.isInteger(firstnumber) && Number.isInteger(secondnumber))
@@ -138,12 +123,6 @@ app.post('/multiply', function(req,res){
 app.post('/divide', function(req,res){
 	var firstnumber = req.body.num1;
 	var secondnumber = req.body.num2;
-	
-	console.log(firstnumber);
-	console.log(secondnumber);
-	
-	console.log(Number.isInteger(firstnumber));
-	console.log(Number.isInteger(secondnumber));
 	
 	if(req.session.username)
 	{
