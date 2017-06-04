@@ -44,7 +44,7 @@ app.post('/login', function(req,res){
 		   
 		   else if (!err && rows.length>0)
 		   {
-			   req.session.username=true;
+			   req.session.username=req.body.username;
 			   req.session.cookie.maxAge= 1*60*1000;
 			   res.json({'message':'Welcome '+rows[0].firstname});		   
 		   }
