@@ -7,12 +7,12 @@ var http = require('http');
 var session = require('express-session');
 app.use(session({
     secret: 'Ajay',
-    maxAge: 1*60*1000, 
+    cookie:{maxAge: 1*60*1000}, 
 	secure: true,
 	httpOnly: true,
-	ephemeral:true,
 	resave: true,
-	saveUninitialized:false
+	rolling:true,
+	saveUninitialized:true
 }))
 
 app.use(bodyParser.json());
@@ -45,7 +45,6 @@ app.post('/login', function(req,res){
 		   else if (!err && rows.length>0)
 		   {
 			   req.session.username=req.body.username;
-			   req.session.cookie.maxAge= 1*60*1000;
 			   res.json({'message':'Welcome '+rows[0].firstname});		   
 		   }
 		   
@@ -61,7 +60,7 @@ app.post('/logout',function(req,res){
 	if(req.session.username)
 	{
 		req.session.destroy();
-	res.json({'message':'You have been successfully logged out'});
+	    res.json({'message':'You have been successfully logged out'});
 	}
 	
 	else
