@@ -71,7 +71,7 @@ app.post('/logout',function(req,res){
 });
 
 app.post('/add', function(req,res){
-	console.log("Hello"+req.session.username);
+	console.log(" Hello "+req.session.username);
 	
 	var firstnumber = req.body.num1;
 	var secondnumber = req.body.num2;
