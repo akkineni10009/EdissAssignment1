@@ -8,8 +8,6 @@ var session = require('express-session');
 app.use(session({
     secret: 'Ajay',
     cookie:{maxAge: 1*60*1000}, 
-	secure: true,
-	httpOnly: true,
 	resave: true,
 	rolling:true,
 	saveUninitialized:true
