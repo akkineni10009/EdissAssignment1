@@ -43,6 +43,9 @@ app.post('/login', function(req,res){
 		   else if (!err && rows.length>0)
 		   {
 			   req.session.username=req.body.username;
+			   console.log(" Hello "+req.session.username);
+			   console.log(" Hello "+req.body.username);
+			   
 			   res.json({'message':'Welcome '+rows[0].firstname});		   
 		   }
 		   
